@@ -34,6 +34,7 @@ lcorp MODULE-IDENTITY
 --     |-> fs (4)
 --     |-> xsnmpInternal (5)
 --     |-> raid (6)
+--     |-> timeMachine (7)
 
 xsnmp                OBJECT IDENTIFIER ::= { lcorp 2 }
 xsnmpObjects         OBJECT IDENTIFIER ::= { xsnmp 1 }
@@ -1494,4 +1495,114 @@ raidVolumeSetIndex OBJECT-TYPE
     "Row number of the RAID Set that this volume belongs to."
 ::= { raidVolumeEntry 9 }
 
+--
+-- Time Machine Backup
+--
+
+timeMachine OBJECT IDENTIFIER ::= { xsnmpObjects 7 }
+
+tmDaysSinceBackup OBJECT-TYPE
+    SYNTAX  Integer
+    UNITS   "Days"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Number of days since last successful backup"
+    ::= { timeMachine 1 }
+
+tmBlockSize OBJECT-TYPE
+    SYNTAX  Integer
+    UNITS   "Bytes"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Block Size as reported by results file in Bytes"
+    ::= { timeMachine 2 }
+
+tmBlocksAvailable OBJECT-TYPE
+    SYNTAX  Gauge32
+    UNITS   "Blocks"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Available Blocks as reported by results file"
+    ::= { timeMachine 3 }
+
+tmBlocksToCopy OBJECT-TYPE
+    SYNTAX  Gauge32
+    UNITS   "Blocks"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Blocks To Copy as reported by results file"
+    ::= { timeMachine 4 }
+
+tmBytesAvailable OBJECT-TYPE
+    SYNTAX  Gauge32
+    UNITS   "MBytes"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Available Bytes as reported by results file in MegaBytes"
+    ::= { timeMachine 5 }
+
+tmBytesToCopy OBJECT-TYPE
+    SYNTAX  Gauge32
+    UNITS   "MBytes"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Bytes To Copy as reported by results file in MegaBytes"
+    ::= { timeMachine 6 }
+    
+tmClientID OBJECT-TYPE
+    SYNTAX  DisplayString
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup ClientID as reported by results file"
+    ::= { timeMachine 7 }
+
+tmPaddedBytesRequired OBJECT-TYPE
+    SYNTAX  Gauge32
+    UNITS   "MBytes"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup ClientID as reported by results file"
+    ::= { timeMachine 8 }
+
+tmPercentComplete OBJECT-TYPE
+    SYNTAX  Integer
+    UNITS   "Percent"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Percent Complete"
+    ::= { timeMachine 9}
+    
+tmResult OBJECT-TYPE
+    SYNTAX  Integer
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Result"
+    ::= { timeMachine 10}
+    
+tmRunning OBJECT-TYPE
+    SYNTAX  Integer
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Running Status"
+    ::= { timeMachine 11}
+    
+tmOldestSnaphot OBJECT-TYPE
+    SYNTAX  Integer
+    UNITS   "Days"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "TimeMachine Backup Days since oldest complete snapshot"
+    ::= { timeMachine 12}
 END
